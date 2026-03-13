@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Our Little Board 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #1a1118;
+    --pink: #ff6b9d;
+    --rose: #ff4f7b;
+    --cream: #fff8f0;
+    --shadow: rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Kalam', cursive;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at 10% 10%, rgba(255,107,157,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 90%, rgba(180,80,255,0.06) 0%, transparent 50%);
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #2e1228 0%, #1a0d1f 100%);
+    border-bottom: 1px solid rgba(255,107,157,0.2);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-title {
+    font-family: 'Caveat', cursive;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--pink);
+    text-shadow: 0 0 20px rgba(255,107,157,0.4);
+  }
+
+  .header-title span {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-left: 8px;
+  }
+
+  /* TIMER */
+  .timer-box {
+    background: rgba(255,107,157,0.08);
+    border: 1px solid rgba(255,107,157,0.25);
+    border-radius: 20px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .heart-pulse {
+    font-size: 1.2rem;
+    animation: heartbeat 1.2s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+
+  .timer-label {
+    font-family: 'Caveat', cursive;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .timer-units { display: flex; gap: 10px; align-items: center; }
+
+  .timer-unit { text-align: center; }
+
+  .timer-num {
+    font-family: 'Caveat', cursive;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--pink);
+    line-height: 1;
+    text-shadow: 0 0 12px rgba(255,107,157,0.5);
+  }
+
+  .timer-sub {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .timer-sep { color: rgba(255,107,157,0.35); font-size: 1.2rem; padding-bottom: 10px; }
+
+  /* TOOLBAR */
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    font-family: 'Caveat', cursive;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .author-sel {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: white;
+    padding: 6px 12px;
+    font-family: 'Kalam', cursive;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .add-btn {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--rose), var(--pink));
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 9px 22px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(255,79,123,0.35);
+  }
+
+  .add-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,79,123,0.5); }
+  .add-btn:active { transform: scale(0.96); }
+
+  /* BOARD */
+  .board {
+    position: relative;
+    min-height: calc(100vh - 148px);
+    padding: 40px;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.02) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgba(255,255,255,0.08);
+    pointer-events: none;
+  }
+
+  .empty-state .big { font-size: 4.5rem; }
+
+  .empty-state p {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+
+  /* NOTE */
+  .note {
+    position: absolute;
+    width: 220px;
+    min-height: 200px;
+    border-radius: 3px 3px 3px 14px;
+    cursor: grab;
+    box-shadow: 5px 6px 0 rgba(0,0,0,0.2), 8px 14px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: box-shadow 0.2s;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+  }
+
+  .note:hover {
+    box-shadow: 6px 8px 0 rgba(0,0,0,0.25), 10px 20px 36px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.25);
+    z-index: 50;
+  }
+
+  .note.dragging {
+    cursor: grabbing;
+    transform: rotate(2deg) scale(1.04) !important;
+    box-shadow: 12px 22px 50px rgba(0,0,0,0.65);
+    z-index: 200;
+  }
+
+  /* folded corner */
+  .note::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent rgba(0,0,0,0.15) transparent transparent;
+  }
+
+  .note-pin {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    pointer-events: none;
+  }
+
+  .note-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 11px 5px;
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+  }
+
+  .note-author {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Kalam', cursive;
+  }
+
+  .note-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .note:hover .note-actions { opacity: 1; }
+
+  .note-btn {
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0,0,0,0.45);
+    transition: background 0.15s;
+  }
+
+  .note-btn:hover { background: rgba(0,0,0,0.2); }
+  .note-btn.del:hover { background: rgba(200,0,0,0.18); color: #900; }
+
+  .note-body { flex: 1; padding: 10px 11px 12px; }
+
+  .note-text {
+    width: 100%;
+    min-height: 120px;
+    border: none;
+    background: transparent;
+    font-family: 'Caveat', cursive;
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: rgba(0,0,0,0.72);
+    resize: none;
+    outline: none;
+    line-height: 1.5;
+    cursor: text;
+  }
+
+  .note-text::placeholder { color: rgba(0,0,0,0.28); }
+
+  .note-date {
+    padding: 0 11px 8px;
+    font-size: 0.63rem;
+    color: rgba(0,0,0,0.28);
+    text-align: right;
+    font-family: 'Kalam', cursive;
+  }
+
+  .note-resize {
+    position: absolute;
+    bottom: 4px;
+    right: 5px;
+    width: 14px;
+    height: 14px;
+    cursor: nwse-resize;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 0.75rem;
+    color: rgba(0,0,0,0.25);
+    line-height: 14px;
+    text-align: center;
+    user-select: none;
+  }
+
+  .note:hover .note-resize { opacity: 1; }
+
+  /* NOTE COLORS */
+  .nc-yellow   { background: linear-gradient(155deg, #fff9a0, #fef060); }
+  .nc-pink     { background: linear-gradient(155deg, #ffcce0, #ffaac8); }
+  .nc-mint     { background: linear-gradient(155deg, #b8f5d8, #80edb8); }
+  .nc-blue     { background: linear-gradient(155deg, #b8e4ff, #80ccff); }
+  .nc-peach    { background: linear-gradient(155deg, #ffd8b0, #ffbe80); }
+  .nc-lavender { background: linear-gradient(155deg, #e0c8ff, #c8a0ff); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: #2a1a2e;
+    border: 1px solid rgba(255,107,157,0.3);
+    border-radius: 24px;
+    padding: 28px 30px;
+    width: 330px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    animation: popIn 0.22s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
+  .modal h2 {
+    font-family: 'Caveat', cursive;
+    color: var(--pink);
+    font-size: 1.55rem;
+    margin-bottom: 18px;
+  }
+
+  .modal label {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  .modal input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: white;
+    padding: 9px 12px;
+    font-family: 'Kalam', cursive;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .modal input:focus { border-color: rgba(255,107,157,0.5); }
+
+  .modal-colors { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .modal-color-opt {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .modal-color-opt:hover { transform: scale(1.15); }
+  .modal-color-opt.selected { border-color: white; transform: scale(1.18); }
+
+  .modal-btns { display: flex; gap: 10px; margin-top: 22px; }
+
+  .modal-btns button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 14px;
+    border: none;
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+
+  .btn-confirm {
+    background: linear-gradient(135deg, var(--rose), var(--pink));
+    color: white;
+    box-shadow: 0 4px 14px rgba(255,79,123,0.3);
+  }
+
+  .btn-confirm:hover { transform: translateY(-2px); }
+
+  .btn-cancel {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.55);
+  }
+
+  .btn-cancel:hover { background: rgba(255,255,255,0.12); }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,107,157,0.3); border-radius: 99px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-title">
+    Our Little Board
+    <span>✦ a space just for us</span>
+  </div>
+  <div class="timer-box">
+    <span class="heart-pulse">💗</span>
+    <div class="timer-label">Together since Nov 5, 2021</div>
+    <div class="timer-units">
+      <div class="timer-unit">
+        <div class="timer-num" id="t-years">0</div>
+        <div class="timer-sub">years</div>
+      </div>
+      <div class="timer-sep">·</div>
+      <div class="timer-unit">
+        <div class="timer-num" id="t-months">0</div>
+        <div class="timer-sub">months</div>
+      </div>
+      <div class="timer-sep">·</div>
+      <div class="timer-unit">
+        <div class="timer-num" id="t-days">0</div>
+        <div class="timer-sub">days</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <span class="toolbar-label">Adding as →</span>
+  <select id="author-select" class="author-sel">
+    <option value="Me">💁 Me</option>
+    <option value="Partner">💑 Partner</option>
+  </select>
+  <button class="add-btn" onclick="openModal()">＋ Add Note</button>
+</div>
+
+<!-- BOARD -->
+<div class="board" id="board">
+  <div class="empty-state" id="empty-state">
+    <div class="big">📌</div>
+    <p>Your board is empty...<br/>add your first note!</p>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>📌 New Sticky Note</h2>
+    <label>Pick a colour</label>
+    <div class="modal-colors" id="modal-colors">
+      <div class="modal-color-opt nc-yellow selected"   data-c="nc-yellow"   style="background:linear-gradient(155deg,#fff9a0,#fef060)"></div>
+      <div class="modal-color-opt nc-pink"     data-c="nc-pink"     style="background:linear-gradient(155deg,#ffcce0,#ffaac8)"></div>
+      <div class="modal-color-opt nc-mint"     data-c="nc-mint"     style="background:linear-gradient(155deg,#b8f5d8,#80edb8)"></div>
+      <div class="modal-color-opt nc-blue"     data-c="nc-blue"     style="background:linear-gradient(155deg,#b8e4ff,#80ccff)"></div>
+      <div class="modal-color-opt nc-peach"    data-c="nc-peach"    style="background:linear-gradient(155deg,#ffd8b0,#ffbe80)"></div>
+      <div class="modal-color-opt nc-lavender" data-c="nc-lavender" style="background:linear-gradient(155deg,#e0c8ff,#c8a0ff)"></div>
+    </div>
+    <label>Message (optional — you can type directly on the note too)</label>
+    <input type="text" id="modal-text" placeholder="Write something sweet 🌸" autocomplete="off"/>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-confirm" onclick="confirmAdd()">Add ✦</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── TIMER ──────────────────────────────────────────────────
+const START = new Date('2021-11-05T00:00:00');
+
+function updateTimer() {
+  const now = new Date();
+  let y = now.getFullYear() - START.getFullYear();
+  let m = now.getMonth()    - START.getMonth();
+  let d = now.getDate()     - START.getDate();
+  if (d < 0) { m--; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+  if (m < 0) { y--; m += 12; }
+  document.getElementById('t-years').textContent  = y;
+  document.getElementById('t-months').textContent = m;
+  document.getElementById('t-days').textContent   = d;
+}
+
+updateTimer();
+setInterval(updateTimer, 60000);
+
+// ── STATE ──────────────────────────────────────────────────
+let notes = JSON.parse(localStorage.getItem('ourboard_v2') || '[]');
+let selColor = 'nc-yellow';
+const PINS = ['📌','📍','🧷'];
+const ACOL  = { 'Me': '#d4006a', 'Partner': '#0060b0' };
+
+function save() { localStorage.setItem('ourboard_v2', JSON.stringify(notes)); }
+
+// ── RENDER ─────────────────────────────────────────────────
+function render() {
+  const board = document.getElementById('board');
+  board.querySelectorAll('.note').forEach(el => el.remove());
+  document.getElementById('empty-state').style.display = notes.length ? 'none' : 'block';
+
+  notes.forEach((n, i) => {
+    const el = document.createElement('div');
+    el.className = `note ${n.color}`;
+    el.style.cssText = `left:${n.x}px;top:${n.y}px;width:${n.w||220}px;min-height:${n.h||200}px;transform:rotate(${n.rot||0}deg)`;
+    el.dataset.idx = i;
+
+    el.innerHTML = `
+      <div class="note-pin">${PINS[i % PINS.length]}</div>
+      <div class="note-header">
+        <span class="note-author" style="color:${ACOL[n.author]||'#555'}">${n.author}</span>
+        <div class="note-actions">
+          <button class="note-btn" title="Rotate" data-action="rotate">↻</button>
+          <button class="note-btn del" title="Delete" data-action="delete">✕</button>
+        </div>
+      </div>
+      <div class="note-body">
+        <textarea class="note-text" placeholder="Write here... ✍️">${n.text||''}</textarea>
+      </div>
+      <div class="note-date">${n.date}</div>
+      <div class="note-resize">⤡</div>
+    `;
+
+    // events
+    el.addEventListener('mousedown',  onNoteMD);
+    el.addEventListener('touchstart', onNoteTD, { passive: false });
+    el.querySelector('.note-text').addEventListener('input', e => {
+      notes[+el.dataset.idx].text = e.target.value; save();
+    });
+    el.querySelector('.note-text').addEventListener('mousedown', e => e.stopPropagation());
+    el.querySelectorAll('.note-btn').forEach(b => {
+      b.addEventListener('mousedown', e => e.stopPropagation());
+      b.addEventListener('click', e => {
+        const idx = +el.dataset.idx;
+        if (b.dataset.action === 'rotate') { notes[idx].rot = ((notes[idx].rot||0) + 15) % 360; save(); render(); }
+        if (b.dataset.action === 'delete') { notes.splice(idx, 1); save(); render(); }
+      });
+    });
+    el.querySelector('.note-resize').addEventListener('mousedown', e => { e.stopPropagation(); startResize(e, el); });
+
+    board.appendChild(el);
+  });
+}
+
+// ── DRAG ───────────────────────────────────────────────────
+let drag = null;
+
+function onNoteMD(e) {
+  if (e.button !== 0) return;
+  startDrag(e.currentTarget, e.clientX, e.clientY);
+  e.preventDefault();
+}
+
+function onNoteTD(e) {
+  startDrag(e.currentTarget, e.touches[0].clientX, e.touches[0].clientY);
+}
+
+function startDrag(el, cx, cy) {
+  const rect = el.getBoundingClientRect();
+  drag = { el, ox: cx - rect.left, oy: cy - rect.top };
+  el.classList.add('dragging');
+  // bring to front by moving in array
+  const idx = +el.dataset.idx;
+  const n = notes.splice(idx, 1)[0];
+  notes.push(n);
+  save();
+  // re-index
+  document.querySelectorAll('.note').forEach((node, i) => node.dataset.idx = i);
+  el.dataset.idx = notes.length - 1;
+}
+
+document.addEventListener('mousemove', e => {
+  if (drag) moveDrag(e.clientX, e.clientY);
+  if (rsz)  doResize(e.clientX, e.clientY);
+});
+
+document.addEventListener('touchmove', e => {
+  if (drag) { moveDrag(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }
+}, { passive: false });
+
+function moveDrag(cx, cy) {
+  const board = document.getElementById('board');
+  const br = board.getBoundingClientRect();
+  const x = Math.max(0, Math.min(board.offsetWidth  - drag.el.offsetWidth,  cx - br.left - drag.ox));
+  const y = Math.max(0, Math.min(board.offsetHeight - drag.el.offsetHeight, cy - br.top  - drag.oy));
+  drag.el.style.left = x + 'px';
+  drag.el.style.top  = y + 'px';
+}
+
+document.addEventListener('mouseup',  endAll);
+document.addEventListener('touchend', endAll);
+
+function endAll() {
+  if (drag) {
+    const idx = +drag.el.dataset.idx;
+    notes[idx].x = parseInt(drag.el.style.left);
+    notes[idx].y = parseInt(drag.el.style.top);
+    drag.el.classList.remove('dragging');
+    drag = null;
+    save();
+    render();
+  }
+  rsz = null;
+}
+
+// ── RESIZE ─────────────────────────────────────────────────
+let rsz = null;
+
+function startResize(e, el) {
+  rsz = { el, sx: e.clientX, sy: e.clientY, sw: el.offsetWidth, sh: el.offsetHeight };
+  e.preventDefault();
+}
+
+function doResize(cx, cy) {
+  if (!rsz) return;
+  const idx = +rsz.el.dataset.idx;
+  const w = Math.max(160, rsz.sw + (cx - rsz.sx));
+  const h = Math.max(140, rsz.sh + (cy - rsz.sy));
+  rsz.el.style.width    = w + 'px';
+  rsz.el.style.minHeight = h + 'px';
+  notes[idx].w = w;
+  notes[idx].h = h;
+  save();
+}
+
+// ── MODAL ──────────────────────────────────────────────────
+document.querySelectorAll('.modal-color-opt').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.modal-color-opt').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    selColor = el.dataset.c;
+  });
+});
+
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('modal-text').value = '';
+  setTimeout(() => document.getElementById('modal-text').focus(), 150);
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal')) closeModal();
+});
+
+document.getElementById('modal-text').addEventListener('keydown', e => {
+  if (e.key === 'Enter')  confirmAdd();
+  if (e.key === 'Escape') closeModal();
+});
+
+function confirmAdd() {
+  const author = document.getElementById('author-select').value;
+  const text   = document.getElementById('modal-text').value.trim();
+  const board  = document.getElementById('board');
+  const now    = new Date();
+  const date   = now.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+  const x = 60  + Math.random() * Math.max(80, board.offsetWidth  - 320);
+  const y = 20  + Math.random() * Math.max(80, board.offsetHeight - 280);
+  const rot = (Math.random() - 0.5) * 10;
+  notes.push({ text, color: selColor, author, x, y, rot, date, w: 220, h: 200 });
+  save();
+  closeModal();
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
