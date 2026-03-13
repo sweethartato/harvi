@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Our Little Board 💌</title>
+<title>Harvi Board 💌</title>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
@@ -450,8 +450,8 @@
 <div class="toolbar">
   <span class="toolbar-label">Adding as →</span>
   <select id="author-select" class="author-sel">
-    <option value="Me">🐋 Pupu</option>
-    <option value="Partner">💑 Taku</option>
+    <option value="Pupu">🐋 Pupu</option>
+    <option value="Taku">💑 Taku</option>
   </select>
   <button class="add-btn" onclick="openModal()">＋ Add Note</button>
 </div>
@@ -516,7 +516,7 @@
   let notes = [];
   let selColor = 'nc-yellow';
   const PINS = ['📌','📍','🧷'];
-  const ACOL = { 'Me': '#d4006a', 'Partner': '#0060b0' };
+  const ACOL = { 'Pupu': '#d4006a', 'Taku': '#0060b0' };
 
   function setSyncBadge(state) {
     const b = document.getElementById('sync-badge');
