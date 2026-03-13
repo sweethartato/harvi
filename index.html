@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -10,7 +10,6 @@
     --bg: #1a1118;
     --pink: #ff6b9d;
     --rose: #ff4f7b;
-    --cream: #fff8f0;
     --shadow: rgba(0,0,0,0.5);
   }
 
@@ -56,7 +55,6 @@
     margin-left: 8px;
   }
 
-  /* TIMER */
   .timer-box {
     background: rgba(255,107,157,0.08);
     border: 1px solid rgba(255,107,157,0.25);
@@ -67,10 +65,7 @@
     gap: 14px;
   }
 
-  .heart-pulse {
-    font-size: 1.2rem;
-    animation: heartbeat 1.2s ease-in-out infinite;
-  }
+  .heart-pulse { font-size: 1.2rem; animation: heartbeat 1.2s ease-in-out infinite; }
 
   @keyframes heartbeat {
     0%,100% { transform: scale(1); }
@@ -86,8 +81,7 @@
   }
 
   .timer-units { display: flex; gap: 10px; align-items: center; }
-
-  .timer-unit { text-align: center; }
+  .timer-unit  { text-align: center; }
 
   .timer-num {
     font-family: 'Caveat', cursive;
@@ -106,6 +100,22 @@
   }
 
   .timer-sep { color: rgba(255,107,157,0.35); font-size: 1.2rem; padding-bottom: 10px; }
+
+  /* SYNC STATUS */
+  .sync-badge {
+    font-size: 0.72rem;
+    font-family: 'Kalam', cursive;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.04);
+    transition: all 0.3s;
+  }
+
+  .sync-badge.syncing { color: #ffe066; border-color: rgba(255,224,102,0.3); }
+  .sync-badge.synced  { color: #7edfa0; border-color: rgba(126,223,160,0.3); }
+  .sync-badge.error   { color: #ff6b6b; border-color: rgba(255,107,107,0.3); }
 
   /* TOOLBAR */
   .toolbar {
@@ -152,7 +162,7 @@
     box-shadow: 0 4px 16px rgba(255,79,123,0.35);
   }
 
-  .add-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,79,123,0.5); }
+  .add-btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,79,123,0.5); }
   .add-btn:active { transform: scale(0.96); }
 
   /* BOARD */
@@ -164,7 +174,6 @@
     background-size: 28px 28px;
   }
 
-  /* EMPTY STATE */
   .empty-state {
     position: absolute;
     top: 50%;
@@ -210,7 +219,6 @@
     z-index: 200;
   }
 
-  /* folded corner */
   .note::before {
     content: '';
     position: absolute;
@@ -246,13 +254,7 @@
     font-family: 'Kalam', cursive;
   }
 
-  .note-actions {
-    display: flex;
-    gap: 4px;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
+  .note-actions { display: flex; gap: 4px; opacity: 0; transition: opacity 0.2s; }
   .note:hover .note-actions { opacity: 1; }
 
   .note-btn {
@@ -270,7 +272,7 @@
     transition: background 0.15s;
   }
 
-  .note-btn:hover { background: rgba(0,0,0,0.2); }
+  .note-btn:hover     { background: rgba(0,0,0,0.2); }
   .note-btn.del:hover { background: rgba(200,0,0,0.18); color: #900; }
 
   .note-body { flex: 1; padding: 10px 11px 12px; }
@@ -302,10 +304,8 @@
 
   .note-resize {
     position: absolute;
-    bottom: 4px;
-    right: 5px;
-    width: 14px;
-    height: 14px;
+    bottom: 4px; right: 5px;
+    width: 14px; height: 14px;
     cursor: nwse-resize;
     opacity: 0;
     transition: opacity 0.2s;
@@ -318,7 +318,6 @@
 
   .note:hover .note-resize { opacity: 1; }
 
-  /* NOTE COLORS */
   .nc-yellow   { background: linear-gradient(155deg, #fff9a0, #fef060); }
   .nc-pink     { background: linear-gradient(155deg, #ffcce0, #ffaac8); }
   .nc-mint     { background: linear-gradient(155deg, #b8f5d8, #80edb8); }
@@ -355,12 +354,7 @@
     to   { transform: scale(1);    opacity: 1; }
   }
 
-  .modal h2 {
-    font-family: 'Caveat', cursive;
-    color: var(--pink);
-    font-size: 1.55rem;
-    margin-bottom: 18px;
-  }
+  .modal h2 { font-family: 'Caveat', cursive; color: var(--pink); font-size: 1.55rem; margin-bottom: 18px; }
 
   .modal label {
     display: block;
@@ -390,15 +384,14 @@
   .modal-colors { display: flex; gap: 10px; flex-wrap: wrap; }
 
   .modal-color-opt {
-    width: 30px;
-    height: 30px;
+    width: 30px; height: 30px;
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid transparent;
     transition: transform 0.15s, border-color 0.15s;
   }
 
-  .modal-color-opt:hover { transform: scale(1.15); }
+  .modal-color-opt:hover    { transform: scale(1.15); }
   .modal-color-opt.selected { border-color: white; transform: scale(1.18); }
 
   .modal-btns { display: flex; gap: 10px; margin-top: 22px; }
@@ -415,19 +408,9 @@
     transition: transform 0.15s;
   }
 
-  .btn-confirm {
-    background: linear-gradient(135deg, var(--rose), var(--pink));
-    color: white;
-    box-shadow: 0 4px 14px rgba(255,79,123,0.3);
-  }
-
+  .btn-confirm { background: linear-gradient(135deg, var(--rose), var(--pink)); color: white; box-shadow: 0 4px 14px rgba(255,79,123,0.3); }
   .btn-confirm:hover { transform: translateY(-2px); }
-
-  .btn-cancel {
-    background: rgba(255,255,255,0.07);
-    color: rgba(255,255,255,0.55);
-  }
-
+  .btn-cancel  { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.55); }
   .btn-cancel:hover { background: rgba(255,255,255,0.12); }
 
   ::-webkit-scrollbar { width: 5px; }
@@ -436,7 +419,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-title">
     Our Little Board
@@ -462,9 +444,9 @@
       </div>
     </div>
   </div>
+  <div class="sync-badge" id="sync-badge">⟳ connecting...</div>
 </header>
 
-<!-- TOOLBAR -->
 <div class="toolbar">
   <span class="toolbar-label">Adding as →</span>
   <select id="author-select" class="author-sel">
@@ -474,7 +456,6 @@
   <button class="add-btn" onclick="openModal()">＋ Add Note</button>
 </div>
 
-<!-- BOARD -->
 <div class="board" id="board">
   <div class="empty-state" id="empty-state">
     <div class="big">📌</div>
@@ -482,12 +463,11 @@
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h2>📌 New Sticky Note</h2>
     <label>Pick a colour</label>
-    <div class="modal-colors" id="modal-colors">
+    <div class="modal-colors">
       <div class="modal-color-opt nc-yellow selected"   data-c="nc-yellow"   style="background:linear-gradient(155deg,#fff9a0,#fef060)"></div>
       <div class="modal-color-opt nc-pink"     data-c="nc-pink"     style="background:linear-gradient(155deg,#ffcce0,#ffaac8)"></div>
       <div class="modal-color-opt nc-mint"     data-c="nc-mint"     style="background:linear-gradient(155deg,#b8f5d8,#80edb8)"></div>
@@ -505,204 +485,254 @@
 </div>
 
 <script>
-// ── TIMER ──────────────────────────────────────────────────
-const START = new Date('2021-11-05T00:00:00');
+  // ════════════════════════════════════════════
+  // 🔑 PASTE YOUR KEYS HERE
+  const BIN_ID  = '69b3e971b7ec241ddc65a106';
+  const API_KEY = '$2a$10$HLLK3Iml3LOzcRsvPlpX5.kPsE92sGz.CudDUeomd10s8FPSxEiza';
+  // ════════════════════════════════════════════
 
-function updateTimer() {
-  const now = new Date();
-  let y = now.getFullYear() - START.getFullYear();
-  let m = now.getMonth()    - START.getMonth();
-  let d = now.getDate()     - START.getDate();
-  if (d < 0) { m--; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-  if (m < 0) { y--; m += 12; }
-  document.getElementById('t-years').textContent  = y;
-  document.getElementById('t-months').textContent = m;
-  document.getElementById('t-days').textContent   = d;
-}
+  const BASE_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+  const HEADERS  = { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY };
 
-updateTimer();
-setInterval(updateTimer, 60000);
+  // ── TIMER ──────────────────────────────────
+  const START = new Date('2021-11-05T00:00:00');
 
-// ── STATE ──────────────────────────────────────────────────
-let notes = JSON.parse(localStorage.getItem('ourboard_v2') || '[]');
-let selColor = 'nc-yellow';
-const PINS = ['📌','📍','🧷'];
-const ACOL  = { 'Me': '#d4006a', 'Partner': '#0060b0' };
+  function updateTimer() {
+    const now = new Date();
+    let y = now.getFullYear() - START.getFullYear();
+    let m = now.getMonth()    - START.getMonth();
+    let d = now.getDate()     - START.getDate();
+    if (d < 0) { m--; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+    if (m < 0) { y--; m += 12; }
+    document.getElementById('t-years').textContent  = y;
+    document.getElementById('t-months').textContent = m;
+    document.getElementById('t-days').textContent   = d;
+  }
 
-function save() { localStorage.setItem('ourboard_v2', JSON.stringify(notes)); }
+  updateTimer();
+  setInterval(updateTimer, 60000);
 
-// ── RENDER ─────────────────────────────────────────────────
-function render() {
-  const board = document.getElementById('board');
-  board.querySelectorAll('.note').forEach(el => el.remove());
-  document.getElementById('empty-state').style.display = notes.length ? 'none' : 'block';
+  // ── STATE ───────────────────────────────────
+  let notes = [];
+  let selColor = 'nc-yellow';
+  const PINS = ['📌','📍','🧷'];
+  const ACOL = { 'Me': '#d4006a', 'Partner': '#0060b0' };
 
-  notes.forEach((n, i) => {
-    const el = document.createElement('div');
-    el.className = `note ${n.color}`;
-    el.style.cssText = `left:${n.x}px;top:${n.y}px;width:${n.w||220}px;min-height:${n.h||200}px;transform:rotate(${n.rot||0}deg)`;
-    el.dataset.idx = i;
+  function setSyncBadge(state) {
+    const b = document.getElementById('sync-badge');
+    b.className = 'sync-badge ' + state;
+    b.textContent = state === 'syncing' ? '⟳ saving...' : state === 'synced' ? '✓ synced' : '✗ offline';
+  }
 
-    el.innerHTML = `
-      <div class="note-pin">${PINS[i % PINS.length]}</div>
-      <div class="note-header">
-        <span class="note-author" style="color:${ACOL[n.author]||'#555'}">${n.author}</span>
-        <div class="note-actions">
-          <button class="note-btn" title="Rotate" data-action="rotate">↻</button>
-          <button class="note-btn del" title="Delete" data-action="delete">✕</button>
+  // ── JSONBIN API ─────────────────────────────
+  async function loadFromCloud() {
+    try {
+      const res  = await fetch(BASE_URL + '/latest', { headers: HEADERS });
+      const data = await res.json();
+      notes = Array.isArray(data.record) ? data.record : [];
+      setSyncBadge('synced');
+      render();
+    } catch(e) {
+      setSyncBadge('error');
+      console.error('Load failed', e);
+    }
+  }
+
+  let saveTimer = null;
+
+  async function saveToCloud() {
+    setSyncBadge('syncing');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async () => {
+      try {
+        await fetch(BASE_URL, {
+          method: 'PUT',
+          headers: HEADERS,
+          body: JSON.stringify(notes)
+        });
+        setSyncBadge('synced');
+      } catch(e) {
+        setSyncBadge('error');
+        console.error('Save failed', e);
+      }
+    }, 800); // debounce — wait 800ms before saving so rapid changes batch together
+  }
+
+  // Poll for changes from partner every 10 seconds
+  setInterval(async () => {
+    try {
+      const res  = await fetch(BASE_URL + '/latest', { headers: HEADERS });
+      const data = await res.json();
+      if (JSON.stringify(data.record) !== JSON.stringify(notes)) {
+        notes = Array.isArray(data.record) ? data.record : [];
+        render();
+      }
+    } catch(e) { /* silently ignore poll errors */ }
+  }, 10000);
+
+  // ── RENDER ──────────────────────────────────
+  function render() {
+    const board = document.getElementById('board');
+    board.querySelectorAll('.note').forEach(el => el.remove());
+    document.getElementById('empty-state').style.display = notes.length ? 'none' : 'block';
+
+    notes.forEach((n, i) => {
+      const el = document.createElement('div');
+      el.className = `note ${n.color}`;
+      el.style.cssText = `left:${n.x}px;top:${n.y}px;width:${n.w||220}px;min-height:${n.h||200}px;transform:rotate(${n.rot||0}deg)`;
+      el.dataset.idx = i;
+
+      el.innerHTML = `
+        <div class="note-pin">${PINS[i % PINS.length]}</div>
+        <div class="note-header">
+          <span class="note-author" style="color:${ACOL[n.author]||'#555'}">${n.author}</span>
+          <div class="note-actions">
+            <button class="note-btn" title="Rotate" data-action="rotate">↻</button>
+            <button class="note-btn del" title="Delete" data-action="delete">✕</button>
+          </div>
         </div>
-      </div>
-      <div class="note-body">
-        <textarea class="note-text" placeholder="Write here... ✍️">${n.text||''}</textarea>
-      </div>
-      <div class="note-date">${n.date}</div>
-      <div class="note-resize">⤡</div>
-    `;
+        <div class="note-body">
+          <textarea class="note-text" placeholder="Write here... ✍️">${n.text||''}</textarea>
+        </div>
+        <div class="note-date">${n.date}</div>
+        <div class="note-resize">⤡</div>
+      `;
 
-    // events
-    el.addEventListener('mousedown',  onNoteMD);
-    el.addEventListener('touchstart', onNoteTD, { passive: false });
-    el.querySelector('.note-text').addEventListener('input', e => {
-      notes[+el.dataset.idx].text = e.target.value; save();
-    });
-    el.querySelector('.note-text').addEventListener('mousedown', e => e.stopPropagation());
-    el.querySelectorAll('.note-btn').forEach(b => {
-      b.addEventListener('mousedown', e => e.stopPropagation());
-      b.addEventListener('click', e => {
-        const idx = +el.dataset.idx;
-        if (b.dataset.action === 'rotate') { notes[idx].rot = ((notes[idx].rot||0) + 15) % 360; save(); render(); }
-        if (b.dataset.action === 'delete') { notes.splice(idx, 1); save(); render(); }
+      el.addEventListener('mousedown',  onNoteMD);
+      el.addEventListener('touchstart', onNoteTD, { passive: false });
+      el.querySelector('.note-text').addEventListener('input', e => {
+        notes[+el.dataset.idx].text = e.target.value;
+        saveToCloud();
       });
+      el.querySelector('.note-text').addEventListener('mousedown', e => e.stopPropagation());
+      el.querySelectorAll('.note-btn').forEach(b => {
+        b.addEventListener('mousedown', e => e.stopPropagation());
+        b.addEventListener('click', () => {
+          const idx = +el.dataset.idx;
+          if (b.dataset.action === 'rotate') { notes[idx].rot = ((notes[idx].rot||0) + 15) % 360; saveToCloud(); render(); }
+          if (b.dataset.action === 'delete') { notes.splice(idx, 1); saveToCloud(); render(); }
+        });
+      });
+      el.querySelector('.note-resize').addEventListener('mousedown', e => { e.stopPropagation(); startResize(e, el); });
+
+      board.appendChild(el);
     });
-    el.querySelector('.note-resize').addEventListener('mousedown', e => { e.stopPropagation(); startResize(e, el); });
+  }
 
-    board.appendChild(el);
+  // ── DRAG ────────────────────────────────────
+  let drag = null;
+
+  function onNoteMD(e) { if (e.button !== 0) return; startDrag(e.currentTarget, e.clientX, e.clientY); e.preventDefault(); }
+  function onNoteTD(e) { startDrag(e.currentTarget, e.touches[0].clientX, e.touches[0].clientY); }
+
+  function startDrag(el, cx, cy) {
+    const rect = el.getBoundingClientRect();
+    drag = { el, ox: cx - rect.left, oy: cy - rect.top };
+    el.classList.add('dragging');
+    const idx = +el.dataset.idx;
+    const n = notes.splice(idx, 1)[0];
+    notes.push(n);
+    document.querySelectorAll('.note').forEach((node, i) => node.dataset.idx = i);
+    el.dataset.idx = notes.length - 1;
+  }
+
+  document.addEventListener('mousemove', e => {
+    if (drag) moveDrag(e.clientX, e.clientY);
+    if (rsz)  doResize(e.clientX, e.clientY);
   });
-}
 
-// ── DRAG ───────────────────────────────────────────────────
-let drag = null;
+  document.addEventListener('touchmove', e => {
+    if (drag) { moveDrag(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }
+  }, { passive: false });
 
-function onNoteMD(e) {
-  if (e.button !== 0) return;
-  startDrag(e.currentTarget, e.clientX, e.clientY);
-  e.preventDefault();
-}
+  function moveDrag(cx, cy) {
+    const board = document.getElementById('board');
+    const br = board.getBoundingClientRect();
+    const x = Math.max(0, Math.min(board.offsetWidth  - drag.el.offsetWidth,  cx - br.left - drag.ox));
+    const y = Math.max(0, Math.min(board.offsetHeight - drag.el.offsetHeight, cy - br.top  - drag.oy));
+    drag.el.style.left = x + 'px';
+    drag.el.style.top  = y + 'px';
+  }
 
-function onNoteTD(e) {
-  startDrag(e.currentTarget, e.touches[0].clientX, e.touches[0].clientY);
-}
+  document.addEventListener('mouseup',  endAll);
+  document.addEventListener('touchend', endAll);
 
-function startDrag(el, cx, cy) {
-  const rect = el.getBoundingClientRect();
-  drag = { el, ox: cx - rect.left, oy: cy - rect.top };
-  el.classList.add('dragging');
-  // bring to front by moving in array
-  const idx = +el.dataset.idx;
-  const n = notes.splice(idx, 1)[0];
-  notes.push(n);
-  save();
-  // re-index
-  document.querySelectorAll('.note').forEach((node, i) => node.dataset.idx = i);
-  el.dataset.idx = notes.length - 1;
-}
+  function endAll() {
+    if (drag) {
+      const idx = +drag.el.dataset.idx;
+      notes[idx].x = parseInt(drag.el.style.left);
+      notes[idx].y = parseInt(drag.el.style.top);
+      drag.el.classList.remove('dragging');
+      drag = null;
+      saveToCloud();
+      render();
+    }
+    rsz = null;
+  }
 
-document.addEventListener('mousemove', e => {
-  if (drag) moveDrag(e.clientX, e.clientY);
-  if (rsz)  doResize(e.clientX, e.clientY);
-});
+  // ── RESIZE ──────────────────────────────────
+  let rsz = null;
 
-document.addEventListener('touchmove', e => {
-  if (drag) { moveDrag(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }
-}, { passive: false });
+  function startResize(e, el) {
+    rsz = { el, sx: e.clientX, sy: e.clientY, sw: el.offsetWidth, sh: el.offsetHeight };
+    e.preventDefault();
+  }
 
-function moveDrag(cx, cy) {
-  const board = document.getElementById('board');
-  const br = board.getBoundingClientRect();
-  const x = Math.max(0, Math.min(board.offsetWidth  - drag.el.offsetWidth,  cx - br.left - drag.ox));
-  const y = Math.max(0, Math.min(board.offsetHeight - drag.el.offsetHeight, cy - br.top  - drag.oy));
-  drag.el.style.left = x + 'px';
-  drag.el.style.top  = y + 'px';
-}
+  function doResize(cx, cy) {
+    if (!rsz) return;
+    const idx = +rsz.el.dataset.idx;
+    const w = Math.max(160, rsz.sw + (cx - rsz.sx));
+    const h = Math.max(140, rsz.sh + (cy - rsz.sy));
+    rsz.el.style.width     = w + 'px';
+    rsz.el.style.minHeight = h + 'px';
+    notes[idx].w = w;
+    notes[idx].h = h;
+    saveToCloud();
+  }
 
-document.addEventListener('mouseup',  endAll);
-document.addEventListener('touchend', endAll);
+  // ── MODAL ───────────────────────────────────
+  document.querySelectorAll('.modal-color-opt').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.modal-color-opt').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      selColor = el.dataset.c;
+    });
+  });
 
-function endAll() {
-  if (drag) {
-    const idx = +drag.el.dataset.idx;
-    notes[idx].x = parseInt(drag.el.style.left);
-    notes[idx].y = parseInt(drag.el.style.top);
-    drag.el.classList.remove('dragging');
-    drag = null;
-    save();
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.getElementById('modal-text').value = '';
+    setTimeout(() => document.getElementById('modal-text').focus(), 150);
+  }
+
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal')) closeModal();
+  });
+
+  document.getElementById('modal-text').addEventListener('keydown', e => {
+    if (e.key === 'Enter')  confirmAdd();
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function confirmAdd() {
+    const author = document.getElementById('author-select').value;
+    const text   = document.getElementById('modal-text').value.trim();
+    const board  = document.getElementById('board');
+    const now    = new Date();
+    const date   = now.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+    const x   = 60  + Math.random() * Math.max(80, board.offsetWidth  - 320);
+    const y   = 20  + Math.random() * Math.max(80, board.offsetHeight - 280);
+    const rot = (Math.random() - 0.5) * 10;
+    notes.push({ text, color: selColor, author, x, y, rot, date, w: 220, h: 200 });
+    saveToCloud();
+    closeModal();
     render();
   }
-  rsz = null;
-}
 
-// ── RESIZE ─────────────────────────────────────────────────
-let rsz = null;
-
-function startResize(e, el) {
-  rsz = { el, sx: e.clientX, sy: e.clientY, sw: el.offsetWidth, sh: el.offsetHeight };
-  e.preventDefault();
-}
-
-function doResize(cx, cy) {
-  if (!rsz) return;
-  const idx = +rsz.el.dataset.idx;
-  const w = Math.max(160, rsz.sw + (cx - rsz.sx));
-  const h = Math.max(140, rsz.sh + (cy - rsz.sy));
-  rsz.el.style.width    = w + 'px';
-  rsz.el.style.minHeight = h + 'px';
-  notes[idx].w = w;
-  notes[idx].h = h;
-  save();
-}
-
-// ── MODAL ──────────────────────────────────────────────────
-document.querySelectorAll('.modal-color-opt').forEach(el => {
-  el.addEventListener('click', () => {
-    document.querySelectorAll('.modal-color-opt').forEach(e => e.classList.remove('selected'));
-    el.classList.add('selected');
-    selColor = el.dataset.c;
-  });
-});
-
-function openModal() {
-  document.getElementById('modal').classList.add('open');
-  document.getElementById('modal-text').value = '';
-  setTimeout(() => document.getElementById('modal-text').focus(), 150);
-}
-
-function closeModal() { document.getElementById('modal').classList.remove('open'); }
-
-document.getElementById('modal').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal')) closeModal();
-});
-
-document.getElementById('modal-text').addEventListener('keydown', e => {
-  if (e.key === 'Enter')  confirmAdd();
-  if (e.key === 'Escape') closeModal();
-});
-
-function confirmAdd() {
-  const author = document.getElementById('author-select').value;
-  const text   = document.getElementById('modal-text').value.trim();
-  const board  = document.getElementById('board');
-  const now    = new Date();
-  const date   = now.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
-  const x = 60  + Math.random() * Math.max(80, board.offsetWidth  - 320);
-  const y = 20  + Math.random() * Math.max(80, board.offsetHeight - 280);
-  const rot = (Math.random() - 0.5) * 10;
-  notes.push({ text, color: selColor, author, x, y, rot, date, w: 220, h: 200 });
-  save();
-  closeModal();
-  render();
-}
-
-render();
+  // ── INIT ────────────────────────────────────
+  loadFromCloud();
 </script>
 </body>
 </html>
